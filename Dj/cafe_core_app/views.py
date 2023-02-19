@@ -40,28 +40,6 @@ class Menu(viewsets.ModelViewSet):
         MealClick.objects.create(meal=instance_meal, click_date=timezone.now())
         return Response(serializer.data)
 
-    # def update(self, request, *args, **kwargs):
-    #     print(request.data)
-    #     category = request.data.pop('category')
-    #     print(category)
-    #     cat_id = MealCategory.objects.get(meal_type=category)
-    #     partial = kwargs.pop('partial', False)
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance, data=request.data, partial=partial)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.data['category'] = cat_id.id
-    #     self.perform_update(serializer)
-    #     if getattr(instance, '_prefetched_objects_cache', None):
-    #         instance._prefetched_objects_cache = {}
-    #     return Response(serializer.data)
-    #
-    # def perform_update(self, serializer):
-    #     serializer.save()
-    #
-    # def partial_update(self, request, *args, **kwargs):
-    #     kwargs['partial'] = True
-    #     return self.update(request, *args, **kwargs)
-
     @action(methods=['post'], detail=False, url_path='photo_upload')
     def upload(self, request, *args, **kwargs):
         photo = request.data.get('file')
@@ -76,13 +54,6 @@ class Menu(viewsets.ModelViewSet):
                                              title=datetime.now())
         meal.photo.add(obj_photo.id)
         return Response(status=status.HTTP_201_CREATED)
-
-    # def list(self, request, *args, **kwargs):
-    #     object = Meal.objects.all()
-    #     print(object)
-    #     serializer = MenuSerializer(object)
-    #     print(serializer.data)
-    #     return Response(serializer.data)
 
     @action(methods=['get'], detail=False, url_path='get-stat')
     def stat(self, request):
