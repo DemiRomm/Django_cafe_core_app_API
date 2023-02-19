@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block tittle %} Статистика {% endblock %}
+
+{% block content %}
+    {% if top_3 %}
+
+        {{ top_3.0 }}
+
+    {% else %}
+        Описание отсутствует :( Следите за обновлениями! :)
+    {% endif %}
+
+{% endblock %}
+
